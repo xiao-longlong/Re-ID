@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  research_Re-ID:
+    environment:
+      - DEBUG=1
+      - SHOW='true'
+      - DOCKER_BUILDKIT=1
+    # build:
+    #   network: host
+    #   context: .
+    #   dockerfile: docker/Dockerfile.203
+    #   args:
+    #     - progress=plain
+    deploy:
+      mode: replicated
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+              count: all # 这个词条不能少
+          memory: 16g # 保证能用的内存量
+    shm_size: 4GB
+    image: lux.x-contion.top:500/x-contion/cuda_conda_pytorch
+    container_name: Re-ID
+    hostname: ubuntu_conda # 设置主机名或域名
+    entrypoint: "/usr/sbin/sshd -D &"
+    ports:
+      - 10012:22
+      - 8000:8000
+    volumes:
+      - ./:/workspace
+      - /data:/data
+      - /weight:/weight
+      - /output:/output

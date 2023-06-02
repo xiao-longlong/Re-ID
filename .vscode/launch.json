@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "main",
+            "type": "python",
+            "request": "launch",
+            "program": "/workspace/fork/deep-person-reid/scripts/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--config-file",
+                "configs/im_osnet_x1_0_softmax_256x128_amsgrad_cosine.yaml",
+                "--transforms",
+                "random_flip random_erase",
+                "--root",
+                "$PATH_TO_DATA"
+            ],
+            "cwd": "/workspace/fork/deep-person-reid"
+        }
+    ]
+}
